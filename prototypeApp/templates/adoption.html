@@ -1,0 +1,216 @@
+    {% extends 'base.html' %}
+
+    {% block title %}Adopt a Cat{% endblock %}
+
+    {% block content %}
+
+    <div class="adoption-container">
+        <p>Adoption Page</p>
+        <div class="adoption-explanation">
+            <p>Find your perfect furry friend and give them a forever home.</p>
+            <p>Browse through the profiles of cats available for adoption and start your journey to becoming a pet parent today!</p>
+        </div>
+    </div>
+
+    <div class="adoption-edu">
+        <div class="form-container">
+            <form class="adoption-form" method="post" enctype="multipart/form-data">
+                <h1>Submit a Cat for Adoption</h1>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_age">Age</label>
+                    {{ form.age }}
+                </div>
+                <div class="form-group">
+                    <label for="id_breed">Breed</label>
+                    {{ form.breed }}
+                </div>
+                <div class="form-group">
+                    <label for="id_description">Description</label>
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    <label for="id_profile_picture">Cat Picture</label>
+                    <input type="file" id="id_profile_picture" name="profile_picture" class="custom-file-input">
+                    <label for="id_profile_picture" class="custom-file-label">Choose file</label>
+                </div>
+                {% if user.is_authenticated %}
+                    <button type="submit">Submit</button>
+                {%else%}
+                    <p>Please Sign in to Submit A Cat for Adoption</p>
+                {%endif%}
+            </form>
+        </div>
+        <div class="info-container">
+            <h1>Consider Adoption Before Abandonment</h1>
+            <p>At UnCollared, we connect loving families with their future furry companions. Explore our adoption listings to find a cat that needs a forever home. Remember, adopting a pet is a lifelong commitment, but the rewards are immeasurable.</p>
+            <p>If you can no longer care for your pet, there are compassionate and responsible options available.</p>
+            <br>
+            <h2>Why Choose Adoption?</h2>
+            <p>Life circumstances can change, and sometimes, taking care of a pet becomes unmanageable. If you find yourself in this situation, it is crucial to consider adoption rather than abandoning your pet. Abandonment not only endangers your pet but also contributes to the stray animal population.</p>
+            <ul>
+                <li><strong>Safety and Well-being:</strong> By choosing adoption, you ensure that your pet goes to a safe and loving home.</li>
+                <li><strong>Support and Resources:</strong> Many shelters and rescue organizations provide support and resources to help transition your pet to a new home.</li>
+                <li><strong>Community Responsibility:</strong> Adopting out your pet helps reduce the number of homeless animals and supports a compassionate community.</li>
+            </ul>
+            <p>Contact your local shelter or rescue organization to learn more about the adoption process and find the best solution for your beloved pet.</p>
+        </div>
+    </div>
+
+    <h1 style="text-align: center; margin: 10px;">Cats Available for Adoption</h1>
+    <div id="cat-list">
+        <div class="cat-col-1"></div>
+        <div class="cat-col-2"></div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+        <button id="prev-page">Previous</button>
+        <span id="page-info"></span>
+        <button id="next-page">Next</button>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const catsPerPage = 6;
+        let currentPage = 1;
+        let cats = [];
+
+        function updateFileLabel() {
+            const fileInput = document.getElementById('id_profile_picture');
+            const fileLabel = document.querySelector('.custom-file-label');
+
+            fileInput.addEventListener('change', function() {
+                const fileName = fileInput.files[0] ? fileInput.files[0].name : 'Choose file';
+                fileLabel.textContent = fileName;
+            });
+        }
+
+        function fetchCats() {
+            fetch('/api/cats/')
+                .then(response => response.json())
+                .then(data => {
+                    cats = data.filter(cat => !cat.in_review); // Filter out cats that are in review
+                    displayCats();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to load cats. Please try again.');
+                });
+        }
+
+        function displayCats() {
+            const catList = document.getElementById('cat-list');
+            const pageInfo = document.getElementById('page-info');
+            const col1 = document.getElementsByClassName('cat-col-1')[0];
+            const col2 = document.getElementsByClassName('cat-col-2')[0];
+            col1.innerHTML = '';
+            col2.innerHTML = '';
+            
+            const totalPages = Math.ceil(cats.length / catsPerPage);
+            const start = (currentPage - 1) * catsPerPage;
+            const end = start + catsPerPage;
+            const catsToShow = cats.slice(start, end);
+            
+            catsToShow.forEach((cat, index) => {
+                const catItem = document.createElement('div');
+                catItem.className = 'cat-item';
+                catItem.innerHTML = `
+                    <div> <img src="${cat.profile_picture}" alt="${cat.name}" class="cat-image" style="width:150px; height:150px"></div>
+                    <div class="cat-details">
+                        <h2>${cat.name}</h2>
+                        <p><strong>Age:</strong> ${cat.age}</p>
+                        <p><strong>Breed:</strong> ${cat.breed}</p>
+                        <p><strong>Description:</strong> ${cat.description}</p>
+                        <p><strong>Submitted By:</strong> ${cat.submitted_by.username}</p>
+                        <form class="adopt-form" data-cat-id="${cat.id}">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="${csrfToken}">
+                             {% if user.is_authenticated %}
+                                <button type="submit">Adopt</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                `;
+                if (index % 2 === 0) {
+                    col1.appendChild(catItem);
+                } else {
+                    col2.appendChild(catItem);
+                }
+            });
+
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage >= totalPages;
+
+            // Attach submit event listeners to adopt forms
+            document.querySelectorAll('.adopt-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const catId = this.getAttribute('data-cat-id');
+
+                    fetch('/adopt/', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ cat_id: catId })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Adoption request submitted!');
+                        } else {
+                            response.json().then(data => {
+                                alert(`Failed to submit adoption request: ${data.message}`);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+            });
+
+        }
+
+        function scrollToTopOfCatList() {
+            const catList = document.getElementById('cat-list');
+            catList.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Pagination button event listeners
+        document.getElementById('prev-page').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                
+            // Scroll to the top of the cat list
+                scrollToTopOfCatList();
+                displayCats();
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', function() {
+            if (currentPage < Math.ceil(cats.length / catsPerPage)) {
+                currentPage++;
+                
+            // Scroll to the top of the cat list
+                scrollToTopOfCatList();
+                displayCats();
+            }
+        });
+
+        // Initialize functionalities
+        fetchCats();
+        updateFileLabel();
+    });
+
+    </script>
+    {% endblock %}

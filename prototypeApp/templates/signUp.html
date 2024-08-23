@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles2.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'homepage' %}" class="logo">UnCollared</a>
+        <ul>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'adoption' %}">Adoption</a></li>
+                <li><a href="{% url 'donation' %}">Donation</a></li>
+                <li><a href="{% url 'community_cats' %}">Community Cats</a></li>
+                <li><a href="{% url 'thread' %}">Threads</a></li>
+                <li><a href="{% url 'sign_in' %}">Sign In</a></li>
+                <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+
+        </ul>
+    </header>
+    <form method="post">
+        <h1>Sign Up</h1>
+        {% csrf_token %}
+        <div class="form-card">
+            <div class="form-row">
+                <div class="sign-up-form">
+                    <label for="id_first_name">First Name</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="sign-up-form">
+                    <label for="id_last_name">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="sign-up-form">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="sign-up-form">
+                    <label for="id_username">Username</label>
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="sign-up-form">
+                    <label for="id_password1">Password</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="sign-up-form">
+                    <label for="id_password2">Password Confirmation</label>
+                    {{ form.password2 }}
+                </div>
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>Have an Account? <a href="../sign_in">Login Here</a></p>
+        </div>
+        
+    </form>
+</body>
+</html>

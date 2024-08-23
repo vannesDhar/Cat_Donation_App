@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - UnCollared{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    {% if user.is_authenticated %}
+    <div class="welcome-text">
+        <p>Hello, {{ user.username }}!</p>
+        <p>Welcome to UnCollared</p>
+    </div>
+    {% else %}
+    <div class="welcome-text">
+        <p>Hello User</p>
+        <p>Welcome to UnCollared</p>
+    </div>
+    {% endif %}
+</div>
+
+<div class="catchphrase">
+    <p>
+        share your kindness with those who needed today.
+    <p>
+</div>
+<div class="homecard">
+    <img src="../static/homecard1.jpg" alt="">
+    <img src="../static/homecard2.jpeg" alt="">
+    <img src="../static/homecard3.jpeg" alt="">
+</div>
+
+<div>
+    <section class="about">
+        <h3>What to Know About Us</h3>
+        <h1>What is UnCollared?</h1>
+        <div class="block">
+            <p>UnCollared is a dedicated platform aimed at connecting people with their future furry friends. Our mission is to provide a seamless and compassionate environment for pet adoption, donation, and community engagement.</p>
+            <p>We believe in creating a better world for animals and their human companions. Join us today and be a part of the UnCollared community!</p>
+        </div>
+        
+    </section>
+    
+    <section class="about">
+        <h1>How Do We Help?</h1>
+        <div class="block">
+            <p>At UnCollared, we facilitate the adoption process by connecting potential pet owners with shelters and rescues. We also provide a platform for donations to support animal care and initiatives.</p>
+            <p>We encourage community engagement through events, volunteer opportunities, and educational resources. By fostering a supportive environment, we aim to improve the lives of animals and their human companions.</p>
+        </div>
+    </section>
+    
+    <section class="about">
+        <h1>Join Our Community</h1>
+        <div class="block">
+            <p>Become a part of the UnCollared community by creating a profile, joining discussions, and participating in our initiatives. Share your experiences, learn from others, and make a positive impact on animal welfare.</p>
+            <p>Together, we can create a compassionate world where every animal is loved and cared for. Sign up today and start making a difference!</p>
+        </div>
+    </section>
+</div>
+
+<div class="cats-section">
+    <section class="cat-banner">
+        <img src="../static/cat_section.jpg" alt="">
+        <div class="rectangle">
+            <p>"One day we will know that all animals have a soul.</p>
+            <P>Hopefully this knowledge does not comes when it is too late"</P>
+            <p><i>Anthony Douglas William</i></p>
+        </div>
+    </section>
+
+    <section class="stray-feral">
+        <h1>What is the difference between stray cats, feral cats, and community cats?</h1>
+        <div class="cat-diff">
+            <p>Stray cats, feral cats, and community cats are often confused, but there are key differences between the three, primarily in their behavior and interaction with humans.</p>
+            <h2>Stray Cats</h2>
+            <div class="cat-flex">
+                <img src="../static/cat1.jpg" alt="">
+                <ul>
+                    <li><strong>Socialization:</strong> Stray cats are typically socialized to humans. They may have been pets at one point but have either been lost or abandoned.</li>
+                    <li><strong>Behavior:</strong> Stray cats may approach humans, seek food or shelter, and can sometimes be re-socialized and adopted as pets.</li>
+                    <li><strong>Appearance:</strong> They might appear well-groomed or slightly disheveled, depending on how long they have been stray.</li>
+                    <li><strong>Habitat:</strong> Strays are often found near human habitations, like neighborhoods or city areas, where they can find food and shelter.</li>
+                </ul>
+            </div>
+
+            <h2>Feral Cats</h2>
+            <div class="cat-flex">
+                <ul>
+                    <li><strong>Socialization:</strong> Feral cats have had little to no contact with humans and are not socialized. They are typically born in the wild and have adapted to living without human interaction.</li>
+                    <li><strong>Behavior:</strong> Ferals are usually fearful of humans and avoid them. They are less likely to approach people and are difficult to domesticate.</li>
+                    <li><strong>Appearance:</strong> They may appear rougher and less groomed due to their outdoor living conditions.</li>
+                    <li><strong>Habitat:</strong> Feral cats tend to live in colonies in more secluded areas, like forests, abandoned buildings, or industrial zones, where they hunt for food.</li>
+                </ul>
+                <img src="../static/cat2.jpg" alt="">
+            </div>
+ 
+            <h2>Community Cats</h2>
+            <div class="com-cat-container">
+                <div class="cat-flex">
+                    <img src="../static/cat3.jpg" alt="">
+                    <ul>
+                        <li><strong>Socialization:</strong> Community cats can include both stray and feral cats. They live in a managed colony with human caretakers who provide food, shelter, and medical care.</li>
+                        <li><strong>Behavior:</strong> Community cats may exhibit a mix of behaviors. Some may be approachable and friendly, especially if they were once pets, while others remain wary of humans.</li>
+                        <li><strong>Appearance:</strong> They might appear well-groomed if the colony is well-managed, or rougher if not. Many community cats are neutered and ear-tipped to indicate they are part of a managed colony.</li>
+                        <li><strong>Habitat:</strong> Community cats live in colonies often located in urban or suburban areas. They rely on the support of human caretakers for their survival.</li>
+                    </ul>
+                   
+                </div>
+                <a href="{% url 'community_cats' %}">See listed community cats around you!</a>
+            </div>
+            
+            
+            <p>In summary, the main differences lie in their levels of socialization with humans and their resulting behavior and lifestyle. Stray cats have had some degree of human interaction and can potentially be re-socialized. Feral cats are wild and avoid human contact. Community cats are part of managed colonies, benefiting from human support while often retaining a mix of behaviors from both stray and feral backgrounds.</p>
+        </div>
+    </section>
+
+
+
+{% endblock %}

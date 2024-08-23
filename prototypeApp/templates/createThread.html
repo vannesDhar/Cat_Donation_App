@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Create Thread</title>
+</head>
+<body>
+    <h1>Create a New Thread</h1>
+    <form id="thread-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Thread</button>
+    </form>
+    <script>
+        document.getElementById('thread-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/api/threads/create/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Thread created successfully!');
+                    window.location.href = '/thread';
+                } else {
+                    alert('Failed to create Thread');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
