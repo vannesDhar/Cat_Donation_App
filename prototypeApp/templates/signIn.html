@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles2.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'homepage' %}" class="logo">UnCollared</a>
+        <ul>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'adoption' %}">Adoption</a></li>
+                <li><a href="{% url 'donation' %}">Donation</a></li>
+                <li><a href="{% url 'community_cats' %}">Community Cats</a></li>
+                <li><a href="{% url 'thread' %}">Threads</a></li>
+                <li><a href="{% url 'sign_in' %}">Sign In</a></li>
+                <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+
+        </ul>
+    </header>
+    <form method="post">
+        <h1>Sign In</h1>
+        {% csrf_token %}
+        <div class="form-card">
+            <form method="post">
+                {% csrf_token %}
+                <div class="sign-in-form">
+                    <label for="id_username">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="sign-in-form">
+                    <label for="id_password">Password</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+            <p>Dont have account? <a href="../sign_up">Sign Up Here</a></p>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="cprofile_container">
+        <h1>Profile</h1>
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea id="bio" name="bio" placeholder="Bio"></textarea>
+            <input type="file" id="profile_picture" name="profile_picture">
+            <button type="submit">Save changes</button>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                fetch('/api/profile/', {
+                    method: 'GET',
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('bio').value = data.bio;
+                    if (data.profile_picture) {
+                        const img = document.createElement('img');
+                        img.src = data.profile_picture;
+                        img.style.width = '150px'; // Set the width of the image
+                        img.style.height = '150px'; // Set the height of the image
+                        img.style.objectFit = 'cover'; // Ensure the image covers the area without distortion
+                        document.getElementById('profile-form').prepend(img);
+                    }
+                });
+
+                document.getElementById('profile-form').onsubmit = function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(document.getElementById('profile-form'));
+                    fetch('/api/profile/', {
+                        method: 'PUT',
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'Accept': 'application/json'
+                        },
+                        credentials: 'same-origin',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Profile updated:', data);
+                    });
+                };
+            });
+        </script>
+    </div>
+{% endblock %}

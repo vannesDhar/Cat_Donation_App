@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Threads{% endblock %}
+
+{% block content %}
+    <div class="thread-details-container">
+        <p>Thread Details</p>
+        <div class="community-guidelines">
+            <p>Welcome to the discussion! We're glad you're here.</p>
+            <p>Please remember to be kind, respectful, and considerate of others in the community. Your words have an impact, so let's keep the conversation positive and supportive.</p>
+            <p>If you disagree with someone, do so respectfully. We're all here to share our thoughts and ideas, and it's okay to have different perspectives.</p>
+            <p>Thank you for contributing to a friendly and constructive environment. Let's make this community a great place for everyone!</p>
+        </div>
+    </div>
+
+    <div class="thread-details">
+        <h1>{{thread.title}}</h1>
+        <p>{{ thread.content }}</p>
+        {% if thread.image %}
+            <img src="{{ thread.image.url }}" alt="{{ thread.title }}" style="width:100px; height:100px;">
+        {% endif %}
+        <p>Posted by {{ thread.author.username }} on {{ thread.created_at|date:"d M Y, h:i:s a" }}</p>
+
+    </div>
+        
+    <h2>Comments:</h2>
+    <div id="comments-list"></div>
+
+    
+    <form id="comment-form" method="post">
+        <h2>Add a Comment</h2>
+        {% csrf_token %}
+        {{ form.content }}
+        <button type="submit">POST</button>
+    </form>
+    <div id="thread-data" data-thread-id="{{ thread.id }}"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const threadId = document.getElementById('thread-data').getAttribute('data-thread-id');
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return new Intl.DateTimeFormat('en-SG', {
+                    day: '2-digit',       
+                    month: 'short',       
+                    year: 'numeric',     
+                    hour: 'numeric',     
+                    minute: 'numeric',    
+                    second: 'numeric',    
+                    hour12: true         
+                }).format(date).replace(',', '').replace(' at', ',');
+            }
+            function fetchComments() {
+                fetch(`/api/thread/${threadId}/comments/`)
+               
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const commentsList = document.getElementById('comments-list');
+                        commentsList.innerHTML = '';
+                        data.forEach(comment => {
+                            const commentItem = document.createElement('div');
+                            commentItem.className = 'comment-item';
+                            commentItem.innerHTML = `
+                                <p>${comment.content}</p>
+                                <p class="comment-meta">Comment by <span class="comment-author">${comment.author.username}</span> on ${formatDate(comment.created_at)}</p>
+                            `;
+                            commentsList.appendChild(commentItem);
+                        });
+                    });
+            }
+
+            document.getElementById('comment-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch(`/api/create_comment/${threadId}/`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        fetchComments();
+                        document.getElementById('comment-form').reset();
+                    } else {
+                        alert('Failed to add comment');
+                    }
+                });
+            });
+
+            fetchComments();
+        });
+    </script>
+{% endblock %}

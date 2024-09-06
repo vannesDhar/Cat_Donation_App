@@ -1,0 +1,1031 @@
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family:'Poppins', sans-serif;
+}
+body{
+    background-color: #f0f4f8
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-grow: 2;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.6s;
+    z-index: 10000;
+}
+header .logo{
+    position: relative;
+    font-weight: 700;
+    color: #000000;
+    text-decoration: none;
+    font-size: 2em;
+    letter-spacing: 3px;
+    margin-left: 10px;
+    transition: 0.6s;
+}
+header.sticky{
+    padding: 5px 10px;
+    background: #000000;
+}
+header ul{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+
+header ul li{
+    position: relative;
+    list-style: none;
+}
+header ul li a{
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    color: #000000;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    transition: 0.5s;
+}
+.banner{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url(banner.jpg);
+    background-size:cover;
+}
+
+header.sticky ul li a{
+    color: aliceblue;
+}
+
+header.sticky .logo{
+    color: aliceblue;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.section {
+    margin-top: 50px;
+    text-align: center;
+}
+.card {
+    background-image: url(../static/stray-cat.jpg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.card h3 {
+    margin: 0;
+    color: #ffffff;
+}
+.button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+
+.welcome-container {
+    position: absolute;
+    top: 10%;
+    left: 10px;
+}
+
+.welcome-text {
+    color: #000000;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-text p{
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.profile-picture-home{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    margin: 10px;
+}
+.catchphrase{
+    padding: 1%;
+    border-radius: 1%;
+    position: absolute;
+    top: 33%;
+    left: 4.5%;
+    color: gray;
+}
+
+.homecard{
+    position: absolute;
+    display: flex;
+    top: 40%
+}
+
+.homecard img{
+    width: 17.5%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 50px;
+    transition: 0.5s;
+}
+
+.homecard img:hover {
+    transform: scale(1.1);
+    
+}
+.about{
+    margin: 50px;
+    margin-top: 100px;
+}
+.about h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #101720;
+}
+
+.about p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.about ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.about li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+
+@keyframes appear{
+    from{
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes appear_left{
+    from{
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes appear_opacity{
+    from{
+        opacity:0
+    }
+    to{
+        opacity:1
+    }
+}
+
+.block{
+    animation: appear 1s linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+}
+
+.cat-banner {
+    display: flex; /* Use flexbox for the banner section */
+    align-items: stretch; /* Make the children stretch to the same height */
+}
+
+.cat-banner img {
+    animation: appear 1s linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+    width: 35%; /* Define the width of the image */
+    height: auto; /* Maintain aspect ratio */
+    background-size: cover;
+}
+
+.rectangle {
+    animation: appear_opacity 1s linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+    flex: 1; /* Make the rectangle take up remaining space */
+    background-color: #d6e0f0; /* Silvery blue color */
+    height: auto; /* Ensure the rectangle height matches the image height */
+}
+
+.rectangle p{
+    
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-family: "Proxima Nova" , "Helvetica Neue";
+    padding: 10px;
+   
+    
+}
+.rectangle p i{
+    font-size: 15px;
+}
+.stray-feral {
+    margin: 50px auto;
+    padding: 50px; 
+}
+.stray-feral h1 {
+    text-align: center;
+    color:#101720;
+    font-size: 2em;
+}
+.cat-diff h2 {
+    color:#101720;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+.cat-diff ul {
+    list-style-type: disc;
+    margin: 10px 0 20px 20px;
+    padding: 0;
+}
+.cat-diff ul li {
+    margin-bottom: 10px;
+}
+.cat-diff ul li strong {
+    color: #333;
+}
+.cat-diff p {
+    margin-top: 20px;
+    color: #666;
+}
+.cat-flex{
+    display: flex;
+    margin:10px;
+    padding:10px;
+}
+.cat-flex img{
+    width: 250px;
+    border-radius: 10px;
+}
+
+.com-cat-container a{
+    text-decoration: none;
+}
+
+
+/* Adoption Page */
+.adoption-container{
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.adoption-container .adoption-explanation{
+    font-size: 4vh;
+    width: 55%;
+    color: #666;
+}
+.adoption-edu {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.form-container, .info-container {
+    flex: 1;
+    margin: 10px;
+    border-radius: 8px;
+    max-width: 50%;
+}
+.info-container {
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.info-container h1 {
+    font-size: 28px;
+    color: #d9534f;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+   
+}
+
+.info-container h2 {
+    font-size: 24px;
+    color: #5bc0de;
+  
+    margin-bottom: 15px;
+}
+
+.info-container ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.info-container ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.info-container ul li strong {
+    color: #d9534f;
+}
+
+.adoption-form {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid black;
+    background: #e2e2e2;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.adoption-form h1 {
+    text-align: center;
+    color: #110a0a;
+    margin-bottom: 20px;
+    font-size: 2em;
+    letter-spacing: 1.5px;
+}
+
+.adoption-form .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input[type="file"] {
+    display: none;
+}
+.adoption-form .form-group label {
+    margin-bottom: 5px;
+    color: #312222;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.adoption-form .form-group input,
+.adoption-form .form-group select,
+.adoption-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.adoption-form .form-group input:focus,
+.adoption-form .form-group select:focus,
+.adoption-form .form-group textarea:focus {
+    border-color: #7c7c7c;
+    outline: none;
+}
+
+.adoption-form .form-group .custom-file-input {
+    display: none;
+}
+
+.adoption-form .form-group .custom-file-label {
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #e6e6e6;
+    color: #0f0d0d;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.adoption-form .form-group .custom-file-label:hover {
+    background-color: #f0f0f0;
+    border-color: #000000;
+}
+
+.adoption-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #dddddd;
+    border: none;
+    border-radius: 4px;
+    color: rgb(99, 99, 99);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.adoption-form button:hover {
+    background-color: #353535;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+#cat-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+.cat-col-1, .cat-col-2 {
+    width: 48%;
+}
+.cat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cat-item img {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+}
+
+.cat-details {
+    flex-grow: 1;
+    padding: 10px;
+    max-width: 80%;
+    margin: 5px;
+    word-wrap: break-word;
+}
+
+.cat-details h2 {
+    margin: 0 0 10px;
+}
+
+.cat-details p {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.cat-details form {
+    margin-top: 10px;
+}
+
+.adopt-form button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.adopt-form button:hover {
+    background-color: #218838;
+}
+
+.pagination-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.pagination-controls button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.pagination-controls span {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+
+/* Community Cat Page */
+.form-title{
+    text-align: center;
+}
+
+.community-container{
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.community-container .community-cat-explanation{
+    font-size: 4vh;
+    width: 55%;
+    color: #666;
+}
+
+.search-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px;
+}
+
+#search-query {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#search-query:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#search-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-form button:hover {
+    background-color: #0056b3;
+}
+
+.community-cat-container{
+    display: flex;
+    justify-content: center;
+    background-image: url("../static/form-bg.jpg");
+    width: 100%;
+    background-size: cover;
+
+    
+}
+.community-cat-form-container {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    align-items: center;
+}
+.community-cat-form-group {
+    margin-bottom: 15px;
+}
+.community-cat-form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.community-cat-form-group input,
+.community-cat-form-group textarea {
+    width:100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.community-cat-form-group textarea {
+    resize: vertical;
+}
+.community-cat-custom-file-input {
+    display: none;
+}
+.community-cat-custom-file-label {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    text-align: center;
+}
+.community-cat-submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.community-cat-submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.community-cats-info {
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 80%;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.community-cats-info h2 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.community-cats-info p {
+    color: #000000;
+    line-height: 1.6;
+    font-size: 16px;
+    text-align: justify;
+}
+
+
+/* Thread Page */
+.thread-container{
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.thread-container .thread-explanation{
+    font-size: 4vh;
+    width: 55%;
+    color: #666;
+}
+.thread-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.thread-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thread-title {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+    color: #007bff;
+}
+
+.thread-author {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.view-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+.view-button:focus {
+    outline: none;
+}
+
+.create-thread {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #8f8f8f; /* Green background */
+    color: white; /* White text */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.create-thread:hover {
+    background-color: #000000; /* Darker green on hover */
+}
+
+.create-thread:active {
+    background-color: #3e8e41; /* Even darker green on click */
+    transform: scale(1.02); /* Slightly reduce size on click */
+}
+
+.create-thread-container{
+    position: absolute;
+    top: 200px;
+    margin-left: 20px;
+}
+#comments-list {
+    margin-top: 20px;
+}
+
+.comment-item {
+    width: 100%;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.comment-item + .comment-item {
+    margin-top: 20px;
+}
+
+.comment-item p {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.comment-meta {
+    font-size: 12px;
+    color: #666;
+}
+
+#comment-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    background-image: url('../static/cat_section.jpg');
+    animation: fadeIn 1s ease-in-out;
+}
+
+#comment-form textarea{
+    padding: 10px;
+    width: 75%;
+}
+
+#comment-form h2{
+    color: white;
+}
+#comment-form button{
+    background-color: rgb(255,255,255,0.3);
+    color: #f4f4f4;
+    border-radius: 2px;
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+}
+
+.thread-details{
+    margin: 10px;
+}
+
+.thread-details-container{
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.thread-details-container .community-guidelines{
+    font-size: 4vh;
+    width: 55%;
+    color: #666;
+}
+
+
+/* Container for the profile section */
+.cprofile_container {
+    position: absolute;
+    top: 10%;
+    margin-left: 10px;
+    width: 50%;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Profile title */
+.cprofile_container h1 {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Bio textarea styling */
+#bio {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile picture input styling */
+#profile_picture {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Save changes button styling */
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Profile image styling */
+.cprofile_container img {
+    display: block;
+    margin: 20px auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Donation page */
+.donation-container{
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    padding-top: 25px;
+    font-size: 7vh;
+}
+.donation-container .donation-explanation{
+    font-size: 4vh;
+    width: 55%;
+    color: #666;
+}
+
+.donation-section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.payment-container{
+    margin: 10px;
+    width: 100%;
+
+}
+.payment-container>.card{
+    height: 100%;
+    background-image: url('./donation-cat1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.payment-container>#set-donate{
+    text-align: center;
+}
+
+.payment-container>#custom-donate{
+    top: 10%;
+    text-align: center;
+}
+
+.donation-education {
+    padding: 50px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.donation-education-content {
+    max-width: 800px;
+    margin: auto;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.8;
+    color: #333;
+}
+
+.donation-education h2 {
+    font-size: 30px;
+    color: #004085;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.donation-education h3 {
+    font-size: 24px;
+    color: #0f0f0f;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.donation-education p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
